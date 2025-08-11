@@ -247,6 +247,106 @@ class ApiService {
     return this.request('/website-content');
   }
 
+  // Services management
+  async getServices() {
+    return this.request('/services');
+  }
+
+  async createService(data: any) {
+    return this.request('/services', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async updateService(id: string, data: any) {
+    return this.request(`/services/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async deleteService(id: string) {
+    return this.request(`/services/${id}`, {
+      method: 'DELETE',
+    });
+  }
+
+  // Hero content management
+  async getHeroContent() {
+    return this.request('/hero-content');
+  }
+
+  async createHeroContent(data: any) {
+    return this.request('/hero-content', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async updateHeroContent(id: string, data: any) {
+    return this.request(`/hero-content/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async deleteHeroContent(id: string) {
+    return this.request(`/hero-content/${id}`, {
+      method: 'DELETE',
+    });
+  }
+
+  // Stats management
+  async getStats() {
+    return this.request('/stats');
+  }
+
+  async createStat(data: any) {
+    return this.request('/stats', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async updateStat(id: string, data: any) {
+    return this.request(`/stats/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async deleteStat(id: string) {
+    return this.request(`/stats/${id}`, {
+      method: 'DELETE',
+    });
+  }
+
+  // About content management
+  async getAboutContent() {
+    return this.request('/about-content');
+  }
+
+  async createAboutContent(data: any) {
+    return this.request('/about-content', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async updateAboutContent(id: string, data: any) {
+    return this.request(`/about-content/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async deleteAboutContent(id: string) {
+    return this.request(`/about-content/${id}`, {
+      method: 'DELETE',
+    });
+  }
+
   // User management
   async getUsers() {
     return this.request('/users');
