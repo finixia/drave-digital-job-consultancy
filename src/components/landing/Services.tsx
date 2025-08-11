@@ -246,74 +246,12 @@ const Services = () => {
                 rotate: [0, 15, 0]
               }}
               transition={{ duration: 2, repeat: Infinity }}
-              >
-                <motion.div
-                  animate={{ 
-                    rotate: [0, 5, -5, 0],
-                    scale: [1, 1.1, 1]
-                  }}
-                  transition={{ 
-                    duration: 4, 
-                    repeat: Infinity,
-                    delay: index * 0.5
-                  }}
-                >
-                  <service.icon className="text-white" size={28} />
-                </motion.div>
-              </motion.div>
+            />
+          </motion.button>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
 
-              <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-red-600 transition-colors">
-                {service.title}
-              </h3>
-
-              <p className="text-gray-600 mb-6 leading-relaxed">
-                {service.description}
-              </p>
-
-              <ul className="space-y-3 mb-8">
-                {service.features.map((feature, featureIndex) => (
-                  <motion.li
-                    key={featureIndex}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 + featureIndex * 0.1 }}
-                    whileHover={{ x: 10, scale: 1.05 }}
-                    className="flex items-center space-x-3"
-                  >
-                    <motion.div 
-                      className="w-2 h-2 bg-red-400 rounded-full"
-                      animate={{ 
-                        scale: [1, 1.5, 1],
-                        opacity: [0.7, 1, 0.7]
-                      }}
-                      transition={{ 
-                        duration: 2, 
-                        repeat: Infinity,
-                        delay: featureIndex * 0.3
-                      }}
-                    />
-                    <span className="text-gray-700 text-sm">{feature}</span>
-                  </motion.li>
-                ))}
-              </ul>
-
-              <motion.button
-                whileHover={{ 
-                  scale: 1.05,
-                  backgroundImage: "linear-gradient(to right, #ef4444, #dc2626)"
-                }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => handleLearnMore(service.id)}
-                className="w-full bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 py-3 rounded-xl font-semibold hover:from-red-500 hover:to-red-600 hover:text-white transition-all duration-300 relative overflow-hidden"
-              >
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
-                  initial={{ x: "-100%" }}
-                  whileHover={{ x: "100%" }}
-                  transition={{ duration: 0.6 }}
-                />
-                Learn More
-              </motion.button>
-            </motion.div>
-          ))}
-        </div>
+export default Services;
