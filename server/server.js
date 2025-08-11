@@ -726,13 +726,18 @@ app.get('/api/dashboard/stats', authenticateAdmin, async (req, res) => {
 // Website Content Management Routes
 app.get('/api/website-content', async (req, res) => {
   try {
+    console.log('Fetching website content...');
     const content = await WebsiteContent.find();
+    console.log('Found website content documents:', content.length);
     const contentObj = {};
     content.forEach(item => {
+      console.log('Processing section:', item.section);
       contentObj[item.section] = item.content;
     });
+    console.log('Returning content object:', Object.keys(contentObj));
     res.json(contentObj);
   } catch (error) {
+    console.error('Error fetching website content:', error);
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 });

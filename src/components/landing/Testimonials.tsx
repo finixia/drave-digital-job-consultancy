@@ -1,20 +1,15 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Star, Quote } from 'lucide-react';
-import { apiService } from '../../utils/api';
 
 interface Testimonial {
-  _id: string;
+  id: number;
   name: string;
   role: string;
   company: string;
   rating: number;
   text: string;
-  avatar: string;
   service: string;
-  featured: boolean;
-  approved: boolean;
-  createdAt: string;
 }
 
 const Testimonials = () => {
@@ -26,37 +21,26 @@ const Testimonials = () => {
     const fetchTestimonials = async () => {
       try {
         setLoading(true);
-        console.log('Fetching testimonials...');
-        const response = await fetch('http://localhost:5000/api/testimonials');
-        console.log('Response status:', response.status);
+        console.log('Fetching testimonials from website content...');
+        const response = await fetch('http://localhost:5000/api/website-content');
         
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         
         const data = await response.json();
-        console.log('Testimonials fetched:', data);
-        setTestimonials(data);
+        console.log('Website content fetched:', data);
+        
+        // Extract testimonials from website content
+        const testimonialsData = data.testimonials || [];
+        console.log('Testimonials data:', testimonialsData);
+        setTestimonials(testimonialsData);
         setError(null);
       } catch (error) {
         console.error('Failed to fetch testimonials:', error);
         setError('Failed to load testimonials. Using fallback data.');
-        // Fallback to empty array if API fails
-        setTestimonials([
-          {
-            _id: '1',
-            name: 'Sample User',
-            role: 'Software Engineer',
-            company: 'Tech Company',
-            rating: 5,
-            text: 'Great service! Highly recommended.',
-            avatar: '👨‍💻',
-            service: 'Job Consultancy',
-            featured: true,
-            approved: true,
-            createdAt: new Date().toISOString()
-          }
-        ]);
+        // Fallback testimonials
+        setTestimonials([]);
       } finally {
         setLoading(false);
       }
@@ -137,7 +121,7 @@ const Testimonials = () => {
           >
             {[...testimonials, ...testimonials].map((testimonial, index) => (
               <motion.div
-                key={`${testimonial._id}-${index}`}
+                key={`${testimonial.id}-${index}`}
                 whileHover={{ scale: 1.05 }}
                 className="flex-shrink-0 w-96 bg-white backdrop-blur-xl border border-gray-200 rounded-3xl p-8 shadow-lg"
               >
@@ -155,7 +139,7 @@ const Testimonials = () => {
 
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">
-                    <div className="text-3xl">{testimonial.avatar}</div>
+                    <div className="text-3xl">👤</div>
                     <div>
                       <div className="text-gray-900 font-semibold text-sm">
                         {testimonial.name}
